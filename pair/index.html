@@ -42,7 +42,7 @@
     // y abrió el navegador en su lugar (ej. mientras el assetlinks.json
     // se propaga, o la primera vez tras instalar la app).
     // Reintenta abrir la app vía el scheme custom de respaldo.
-    const roomId = location.pathname.split("/").filter(Boolean)[1];
+    const roomId = new URLSearchParams(location.search).get("room");
 
     if (roomId) {
       const customSchemeUrl = `qrmirror://pair/${roomId}`;
