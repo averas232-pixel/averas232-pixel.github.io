@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR-Mirror — Abrir app</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0b0f14;
+      color: #e6edf3;
+      font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+      text-align: center;
+      padding: 24px;
+    }
+    h1 { font-size: 20px; }
+    p { color: #7d8590; font-size: 14px; max-width: 320px; }
+    a {
+      display: inline-block;
+      margin-top: 16px;
+      background: #22d3ee;
+      color: #05202a;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>QR-Mirror</h1>
+  <p id="msg">Abriendo la app…</p>
+  <a id="fallbackLink" href="#">Instalar / abrir manualmente</a>
+
+  <script>
+    // Esta página solo se ve si Android NO logró verificar el App Link
+    // y abrió el navegador en su lugar (ej. mientras el assetlinks.json
+    // se propaga, o la primera vez tras instalar la app).
+    // Reintenta abrir la app vía el scheme custom de respaldo.
+    const roomId = location.pathname.split("/").filter(Boolean)[1];
+
+    if (roomId) {
+      const customSchemeUrl = `qrmirror://pair/${roomId}`;
+      document.getElementById("fallbackLink").href = customSchemeUrl;
+
+      // Intento automático de abrir la app
+      window.location.href = customSchemeUrl;
+
+      setTimeout(() => {
+        document.getElementById("msg").textContent =
+          "Si no se abrió la app, instálala primero o toca el botón de abajo.";
+      }, 1500);
+    } else {
+      document.getElementById("msg").textContent = "Sesión no válida.";
+    }
+  </script>
+</body>
+</html>
