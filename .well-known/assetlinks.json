@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.antonyvera.qrmirror",
+      "sha256_cert_fingerprints": [
+        "97:C5:A6:82:3F:BD:F7:F5:5D:49:93:1D:3E:48:74:B0:5C:DB:7F:84:16:A1:4B:28:C4:7F:41:5D:C8:C3:CE:73"
+      ]
+    }
+  }
+]
